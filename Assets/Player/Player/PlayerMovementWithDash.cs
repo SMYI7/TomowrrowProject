@@ -94,8 +94,7 @@ public class PlayerMovementWithDash : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         
 
-        _controls = new PlayerInput();
-        _controls.Enable();
+        Ë 
         _controls.Gamplay.Move.performed += i => _moveInput = i.ReadValue<Vector2>();
         _controls.Gamplay.Move.canceled += i => _moveInput = i.ReadValue<Vector2>();
         _controls.Gamplay.Jump.performed += OnJumpInput;

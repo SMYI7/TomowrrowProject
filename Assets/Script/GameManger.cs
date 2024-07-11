@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class GameManger : MonoBehaviour
     [SerializeField]private GameObject Player;
     public int PlayerTries;
     [HideInInspector] public bool Died;
+    public GameObject[] Hearts;
     void Start()
     {
         PlayerTries = 3;
@@ -19,6 +21,7 @@ public class GameManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Hearts = GameObject.FindGameObjectsWithTag("Heart");
         if (Died)
         {
             if (PlayerTries > 0)
@@ -31,6 +34,10 @@ public class GameManger : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             } 
+        }
+        if (PlayerTries < Hearts.Length) 
+        {
+            Destroy(Hearts[Hearts.Length - 1]);
         }
     }
 }
