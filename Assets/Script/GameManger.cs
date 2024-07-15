@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,4 +39,17 @@ public class GameManger : MonoBehaviour
             Destroy(Hearts[Hearts.Length - 1]);
         }
     }
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }

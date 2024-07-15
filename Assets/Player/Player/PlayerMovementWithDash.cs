@@ -92,14 +92,17 @@ public class PlayerMovementWithDash : MonoBehaviour
         ClimpingStamina = 2;
 
         RB = GetComponent<Rigidbody2D>();
-        
 
-        Ë 
+
+        _controls = new PlayerInput();
+        _controls.Enable();
         _controls.Gamplay.Move.performed += i => _moveInput = i.ReadValue<Vector2>();
         _controls.Gamplay.Move.canceled += i => _moveInput = i.ReadValue<Vector2>();
         _controls.Gamplay.Jump.performed += OnJumpInput;
         _controls.Gamplay.Jump.performed += OnJumpInput;
         _controls.Gamplay.Jump.canceled += OnJumpUpInput;
+        _controls.Gamplay.Dash.performed += OnDashInput;
+       
         
 
     }
@@ -145,6 +148,7 @@ public class PlayerMovementWithDash : MonoBehaviour
                     OnDashInput();
                 }
          */
+        /*
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.JoystickButton0) )
         {
             OnJumpInput();
@@ -159,6 +163,7 @@ public class PlayerMovementWithDash : MonoBehaviour
         {
             OnDashInput();
         }
+        */
         #endregion
         #region COLLISION CHECKS
         if (!IsDashing && !IsJumping)

@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        scoreText.text = "عملاتك : " + Coins;
+        scoreText.text = Coins.ToString() ;
         Debug.Log(scoreText.text);
     }
     public void AddBattery(int score)
