@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour
 {
@@ -11,10 +15,24 @@ public class GameManger : MonoBehaviour
     public int PlayerTries;
     [HideInInspector] public bool Died;
     public GameObject[] Hearts;
-    void Start()
+    public int coinsCount;
+    public int EnemiesCount;
+    public bool isPaused;
+    public Canvas PauseCanve;
+    public UnityEvent onPause;
+    public UnityEvent onNotPause;
+    private void Awake()
     {
         PlayerTries = 3;
         Player = GameObject.FindGameObjectWithTag("Player");
+        coinsCount = GameObject.FindGameObjectsWithTag("Coin").Length;
+        EnemiesCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+    }
+    void Start()
+    {
+        PlayerInput _input = new PlayerInput();
+        _input.Enable();
+        _input.Gamplay.PauseButton.performed += PauseFunc;
     }
 
     // Update is called once per frame
@@ -51,5 +69,20 @@ public class GameManger : MonoBehaviour
     {
         Application.Quit();
     }
+    public void PauseFunc(InputAction.CallbackContext context)
+    {
+        if (!isPaused)
+        {
+            onPause?.Invoke();
+            isPaused = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            isPaused = false;
+            onNotPause?.Invoke();
+            Time.timeScale = 1;
+        }
+        }
 
 }
